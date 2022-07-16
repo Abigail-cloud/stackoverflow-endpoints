@@ -4,19 +4,19 @@ const router = express.Router();
 const{ postsCreate, postsFindAll, postsFindOne, postsUpdate, postsDelete } = require ('../controller/post.js')
 
 
-// Create a new Note
+// Create a new post
 router.post('/post', postsCreate);
 
-// Retrieve all Notes
+// Retrieve all posts
 router.get('/posts', postsFindAll);
 
-// Retrieve a single Note with noteId
+// Retrieve a single post with postId
 router.get('/posts/:postId', postsFindOne);
 
-// Update a Note with noteId
-router.put('/notes/:postId', postsUpdate);
+// Update a Post with postId
+router.put('/posts/:postId', postsUpdate);
 
-// Delete a Note with noteId
-router.delete('/notes/:postId', postsDelete);
+// Delete a Post with PostId
+router.delete('/notes/:postId/cancel', postsDelete);
 
 module.exports = router;

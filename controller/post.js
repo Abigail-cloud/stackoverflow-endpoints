@@ -56,7 +56,7 @@ module.exports.postsFindOne = (req, res) => {
         .catch((err) => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'Post not found with id ' + req.params.noteId,
+                    message: 'Post not found with id ' + req.params.postId,
                 });
             }
             return res.status(500).send({
@@ -76,7 +76,7 @@ module.exports.postsUpdate = (req, res) => {
     };
 
     // Find post and update it with the request body
-    Note.findByIdAndUpdate(req.params.noteId, {
+    Note.findByIdAndUpdate(req.params.postId, {
             title: req.body.title || "Untitled Post",
             content: req.body.content
         }, { new: true }) //The {new: true} option in the findByIdAndUpdate() method is used to return 
@@ -103,7 +103,7 @@ module.exports.postsUpdate = (req, res) => {
 
 //Delete posts by ID
 module.exports.postsDelete = (req, res) => {
-    Post.findByIdAndRemove(req.params.noteId)
+    Post.findByIdAndRemove(req.params.postId)
         .then((post) => {
             if (!post) {
                 return res.status(404).send({
@@ -115,11 +115,11 @@ module.exports.postsDelete = (req, res) => {
         .catch((err) => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
-                    message: 'Postnot found with id ' + req.params.noteId,
+                    message: 'Postnot found with id ' + req.params.postId,
                 });
             }
             return res.status(500).send({
-                message: 'Could not delete Post with id ' + req.params.noteId,
+                message: 'Could not delete Post with id ' + req.params.postId,
             });
         });
 }
