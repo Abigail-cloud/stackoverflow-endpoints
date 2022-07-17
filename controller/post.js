@@ -15,7 +15,7 @@ module.exports.postsCreate = (req, res) => {
         content: req.body.content,
     });
 
-    // Save Note in the database
+    // Save Post in the database
     note.save()
         .then((data) => {
             res.send(data);
@@ -43,7 +43,7 @@ module.exports.postsFindAll = (req, res) => {
 
 
 module.exports.postsFindOne = (req, res) => {
-    //Retriving a single note by Id
+    //Retriving a single Post by Id
     Note.findById(req.params.postId)
         .then((post) => {
             if (!post) {

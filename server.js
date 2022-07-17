@@ -20,7 +20,7 @@ mongoose.connect(process.env.CONNECTURL,{
 });
 
 //Export the routes
-const user = require('./routes/userapi.js');
+const user = require('./routes/userapi');
 const post = require('./routes/postapi')
 
 //Basepath
@@ -29,8 +29,8 @@ app.get('/', (req, res)=>{
 });
 
 //The routes
-app.use('/auth', user);
 app.use('/', post);
+app.use('/auth', user);
 
 app.listen(port, () => {
     console.log(`Server listening on port  ${port}`);
