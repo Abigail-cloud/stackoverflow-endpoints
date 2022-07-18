@@ -1,4 +1,5 @@
 const Post = require('../models/postModel');
+const asyncHandler = require('express-async-handler')
 
 //Create post
 module.exports.postsCreate = (req, res) => {
@@ -40,6 +41,13 @@ module.exports.postsFindAll = (req, res) => {
             });
         });
 };
+
+
+//Get post by a apecfic user (ID)
+ module.exports.getPost= asyncHandler(async (req, res) => {
+    const posts = await Post.find({ user: req.user.id })
+    res.status(200).json(posts)
+  })
 
 
 module.exports.postsFindOne = (req, res) => {

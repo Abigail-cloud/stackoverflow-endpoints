@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const{ postsCreate, postsFindAll, postsFindOne, postsUpdate, postsDelete } = require ('../controller/post.js')
+const{ postsCreate, postsFindAll, postsFindOne, postsUpdate, postsDelete,getPost } = require ('../controller/post.js')
 
 
 // Create a new post
@@ -18,5 +18,11 @@ router.put('/posts/:postId', postsUpdate);
 
 // Delete a Post with PostId
 router.delete('/notes/:postId/cancel', postsDelete);
+
+//Protect the user
+const { protect } = require('../middleware/authMiddleware');
+
+// Retrieve a single post with userId
+router.get('/posts/:postId/:userId', protect, getPost);
 
 module.exports = router;
