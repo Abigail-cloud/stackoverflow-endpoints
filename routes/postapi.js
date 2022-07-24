@@ -17,6 +17,6 @@ router.get('/posts/:postId', postsFindOne);
 router.put('/posts/:postId', postsUpdate);
 
 // Delete a Post with PostId
-router.delete('/notes/:postId/cancel', postsDelete);
+router.delete('/post/:postId/cancel', postsDelete);
 
 module.exports = router;
