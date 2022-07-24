@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
+//Protect the user middleware
+const { protect } = require('../middleware/authMiddleware');
 
-const{ postsCreate, postsFindAll, postsFindOne, postsUpdate, postsDelete,getPost } = require ('../controller/post.js')
+const{ postsCreate, postsFindAll, postsFindOne, postsUpdate, postsDelete,postByUser } = require ('../controller/post.js')
 
 
 // Create a new post
-router.post('/post', postsCreate);
+router.post('/posts', postsCreate);
 
 // Retrieve all posts
 router.get('/posts', postsFindAll);
@@ -17,12 +19,11 @@ router.get('/posts/:postId', postsFindOne);
 router.put('/posts/:postId', postsUpdate);
 
 // Delete a Post with PostId
-router.delete('/notes/:postId/cancel', postsDelete);
+router.delete('/posts/:postId/cancel', protect, postsDelete);
 
-//Protect the user
-const { protect } = require('../middleware/authMiddleware');
+
 
 // Retrieve a single post with userId
-router.get('/posts/:postId/:userId', protect, getPost);
+router.get('/posts/:postId/:userId',  postByUser);
 
 module.exports = router;

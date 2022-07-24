@@ -1,0 +1,214 @@
+openapi: 3.0.0
+info:
+  title: Stackoverflow Endpoints
+  contact: {}
+  version: '1.0'
+servers:
+  - url:
+    variables: {}
+paths:
+  /auth/signup:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+            example:
+              name: Eddie
+              email: eddie@gmail.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserRequest'
+            example:
+              email: bob@gmail.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /posts:
+    post:
+      tags:
+        - post
+      summary: Create Post
+      operationId: CreatePost
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePostRequest'
+            example:
+              title: BookMark
+              content: Books in library
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Posts
+      summary: Get All Posts
+      operationId: GetAllPosts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /posts/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The post ID
+    get:
+      tags:
+        - Posts
+      summary: Get Single Post
+      operationId: GetSinglePost
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+
+    put:
+      tags:
+        - Posts
+      summary: Update Post
+      operationId: UpdatePost
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePostRequest'
+            example:
+              title: funny
+              content: gags and jokester
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Posts
+      summary: Delete Post
+      operationId: DeletePost
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Eddie
+        email: eddie@gmail.com
+        password: secret
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: bob@gmail.com
+        password: secret
+    CreateJobRequest:
+      title: CreatePostRequest
+      required:
+        - title
+        - content
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        title: BookMark
+        position: Books in library
+    UpdateJobRequest:
+      title: UpdatePostRequest
+      required:
+        - title
+        - content
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        title: funny
+        content: gags and jokester
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Auth
+    description: ''
+  - name: Jobs
+    description: ''
