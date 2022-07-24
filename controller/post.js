@@ -1,4 +1,5 @@
 const Post = require('../models/postModel');
+const asyncHandler = require('express-async-handler')
 
 //Create post
 module.exports.postsCreate = (req, res) => {
@@ -15,7 +16,7 @@ module.exports.postsCreate = (req, res) => {
         content: req.body.content,
     });
 
-    // Save Note in the database
+    // Save Post in the database
     note.save()
         .then((data) => {
             res.send(data);
@@ -42,8 +43,15 @@ module.exports.postsFindAll = (req, res) => {
 };
 
 
+//Get post by a apecfic user (ID)
+ module.exports.getPost= asyncHandler(async (req, res) => {
+    const posts = await Post.find({ user: req.user.id })
+    res.status(200).json(posts)
+  })
+
+
 module.exports.postsFindOne = (req, res) => {
-    //Retriving a single note by Id
+    //Retriving a single Post by Id
     Note.findById(req.params.postId)
         .then((post) => {
             if (!post) {
@@ -56,7 +64,7 @@ module.exports.postsFindOne = (req, res) => {
         .catch((err) => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'Post not found with id ' + req.params.noteId,
+                    message: 'Post not found with id ' + req.params.postId,
                 });
             }
             return res.status(500).send({
@@ -76,7 +84,7 @@ module.exports.postsUpdate = (req, res) => {
     };
 
     // Find post and update it with the request body
-    Note.findByIdAndUpdate(req.params.noteId, {
+    Note.findByIdAndUpdate(req.params.postId, {
             title: req.body.title || "Untitled Post",
             content: req.body.content
         }, { new: true }) //The {new: true} option in the findByIdAndUpdate() method is used to return 
@@ -103,7 +111,7 @@ module.exports.postsUpdate = (req, res) => {
 
 //Delete posts by ID
 module.exports.postsDelete = (req, res) => {
-    Post.findByIdAndRemove(req.params.noteId)
+    Post.findByIdAndRemove(req.params.postId)
         .then((post) => {
             if (!post) {
                 return res.status(404).send({
@@ -115,11 +123,11 @@ module.exports.postsDelete = (req, res) => {
         .catch((err) => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
-                    message: 'Postnot found with id ' + req.params.noteId,
+                    message: 'Postnot found with id ' + req.params.postId,
                 });
             }
             return res.status(500).send({
-                message: 'Could not delete Post with id ' + req.params.noteId,
+                message: 'Could not delete Post with id ' + req.params.postId,
             });
         });
 }
