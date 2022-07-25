@@ -38,10 +38,6 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 const user = require('./routes/userapi');
 const post = require('./routes/postapi')
 
-//Basepath
-app.get('/', (req, res)=>{
-    res.json('Message Recieved!')
-});
 
 //The routes
 app.use('/', post);

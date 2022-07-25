@@ -1,5 +1,5 @@
 const Post = require('../models/postModel');
-const User = require('../models/userModel')
+//const User = require('../models/userModel')
 const asyncHandler = require('express-async-handler')
 
 //Create post
