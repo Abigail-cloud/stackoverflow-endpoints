@@ -129,8 +129,8 @@ module.exports.postsDelete =asyncHandler (async (req, res) => {
 
 
 //retrieve post by user Id
-module.exports.postByUser = asyncHandler(async (req, res) => {
-    const post = await Post.find({ User: req.user.id })
+// module.exports.postByUser = asyncHandler(async (req, res) => {
+//     const post = await Post.find({ User: req.user.id })
   
-    res.status(200).json(post)
-  })
+//     res.status(200).json(post)
+//   })

@@ -210,5 +210,5 @@ security:
 tags:
   - name: Auth
     description: ''
-  - name: Jobs
+  - name: Posts
     description: ''

@@ -24,6 +24,6 @@ router.delete('/posts/:postId/cancel', protect, postsDelete);
 
 
 // Retrieve a single post with userId
-router.get('/posts/:postId/:userId',  postByUser);
+//router.get('/posts/:postId/:userId',  postByUser);
 
 module.exports = router;

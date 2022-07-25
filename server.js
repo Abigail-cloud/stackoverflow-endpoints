@@ -35,7 +35,7 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 
 //Import the routes
-const user = require('./routes/userapi');
+const user = require('./routes/userapi.js');
 const post = require('./routes/postapi')
 
 
