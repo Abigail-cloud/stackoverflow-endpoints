@@ -19,15 +19,10 @@ app.get('/', function(req, res) {
 });
 
 //Configured database
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.CONNECTURL,{
-    useNewUrlParser: true,
-}).then(()=>{
-    console.log('Database connected successfully!');
-}).catch(error => {
-    console.log('Error! Database not connected', error);
-    process.exit();
-});
+const connectDB = async () => {
+    await mongoose.connect(process.env.CONNECTURL)
+}
+connectDB();
 
 // Swagger
 const swaggerUI = require('swagger-ui-express');
@@ -46,5 +41,5 @@ app.use(cors());
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.listen(port, () => {
-    console.log(`Server listening on port  ${port}`);
-})
+        console.log(`Server listening on port  ${port}`);
+    })
